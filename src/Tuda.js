@@ -6,24 +6,21 @@ export default class Tuda extends Player {
     super(x, y, splites.tuda)
 
     this.player = new Player(x, y, splites.tuda)
-    this.flyFlag = false
   }
 
   update() {
     super.update()
     this.player.update()
 
+    // 修正用の最高スピード
+    const speed = this.speed * 1.5
+
     // 通信ラグのズレを軽減する
-    this.pos.x += constrain((this.player.pos.x - this.pos.x) / 2, -2, 2)
-    this.pos.y += constrain((this.player.pos.y - this.pos.y) / 2, -2, 2)
+    this.pos.x += constrain((this.player.pos.x - this.pos.x) / 2, -speed, speed)
+    this.pos.y += constrain((this.player.pos.y - this.pos.y) / 2, -speed, speed)
 
     this.vel.add(this.player.vel)
     this.vel.mult(0.5)
-
-    if (this.flyFlag) {
-      this.flyFlag = false
-      this.controler[UP_ARROW] = false
-    }
   }
 
   setUpdateData(data) {
@@ -36,16 +33,5 @@ export default class Tuda extends Player {
     this.player.controler = data.key
 
     this.controler = data.key
-
-    if (data.isFly && data.isFly !== this.isFly) {
-      this.player.controler[UP_ARROW] = true
-
-      this.flyFlag = true
-    }
-  }
-
-  display() {
-    // ずらして表示させる
-    image(this.splite[this.index], this.pos.x, this.pos.y - height / 2)
   }
 }

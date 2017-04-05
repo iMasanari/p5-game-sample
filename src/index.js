@@ -24,31 +24,29 @@ export function setup() {
 export function draw() {
   background(255)
 
-  takeuti.update()
   tuda.update()
+  takeuti.update()
 
-  takeuti.display()
   tuda.display()
+  takeuti.display()
 }
 
 // サーバーからの通信を受け取る
-socket.on('update', data => {
+socket.on('update', (data) => {
   if (tuda) {
     tuda.setUpdateData(data)
   }
 })
 
-/*
-// キー入力時に位置情報を送信
-export function keyPressed() {
-  if (takeuti) {
-    takeuti.emitPosition()
-  }
-}
+/* キー入力時に位置情報を送信 */
+// export function keyPressed() {
+//   if (takeuti) {
+//     takeuti.emitPosition()
+//   }
+// }
 
-export function keyReleased() {
-  if (takeuti) {
-    takeuti.emitPosition()
-  }
-}
-*/
+// export function keyReleased() {
+//   if (takeuti) {
+//     takeuti.emitPosition()
+//   }
+// }

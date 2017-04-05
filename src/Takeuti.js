@@ -6,7 +6,7 @@ export default class Takeuti extends Player {
     this.move()
     super.update()
 
-    // 1秒に約3回、サーバーに送信
+    // 1秒に約3回（60フレーム/20）、サーバーに送信
     if (frameCount % 20 === 0) {
       this.emitPosition()
     }
@@ -32,7 +32,6 @@ export default class Takeuti extends Player {
         [RIGHT_ARROW]: keyIsDown(RIGHT_ARROW) || undefined,
         [LEFT_ARROW]: keyIsDown(LEFT_ARROW) || undefined,
       },
-      isFly: this.isFly || undefined
     }
 
     socket.emit('update', data);
