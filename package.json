@@ -2,7 +2,7 @@
   "name": "agar_io",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",

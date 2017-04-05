@@ -1,34 +1,54 @@
 import Takeuti from './Takeuti'
+import Tuda from './Tuda'
+import { initSplite } from './splite'
+import socket from './socket'
 
-let player
-let splites = {}
+/** @type {Takeuti} */
+let takeuti
+
+/** @type {Tuda} */
+let tuda
 
 export function preload() {
-  loadImage('image/takeuti.png', function(img) {
-    splites.takeuti = [
-      img.get(0, 0, 60, 100),
-      img.get(64, 0, 60, 100),
-      img.get(128, 0, 60, 100),
-    ]
-  })
-  loadImage('image/tuda.png', function(img) {
-    splites.tuda = [
-      img.get(0, 0, 60, 100),
-      img.get(64, 0, 60, 100),
-      img.get(128, 0, 60, 100),
-    ]
-  })
+  // 画像を先に読み込む
+  initSplite()
 }
 
 export function setup() {
   createCanvas(540, 540)
 
-  player = new Takeuti(splites.takeuti)
+  takeuti = new Takeuti(0, 0)
+  tuda = new Tuda(0, 0)
 }
 
 export function draw() {
   background(255)
-  
-  player.update()
-  player.display()
+
+  takeuti.update()
+  tuda.update()
+
+  takeuti.display()
+  tuda.display()
 }
+
+// サーバーからの通信を受け取る
+socket.on('update', data => {
+  if (tuda) {
+    tuda.setUpdateData(data)
+  }
+})
+
+/*
+// キー入力時に位置情報を送信
+export function keyPressed() {
+  if (takeuti) {
+    takeuti.emitPosition()
+  }
+}
+
+export function keyReleased() {
+  if (takeuti) {
+    takeuti.emitPosition()
+  }
+}
+*/

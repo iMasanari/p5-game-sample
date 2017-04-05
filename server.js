@@ -15,3 +15,14 @@ server.listen(port)
 console.log(`Server running at http://localhost:${port}/`)
 
 const io = socketIo.listen(server)
+
+io.sockets.on('connection', (socket) => {
+    console.log('connection')
+  
+  socket.on('update', (data) => {
+    data.id = socket.id;
+    
+    io.emit('update', data);
+    // socket.broadcast.emit('update', data);
+  });
+})
