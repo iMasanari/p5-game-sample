@@ -6,8 +6,8 @@ export default class Takeuti extends Player {
     this.move()
     super.update()
 
-    // 1秒に約3回（60フレーム/20）、サーバーに送信
-    if (frameCount % 20 === 0) {
+    // 1秒に約4回（60フレーム/15）、サーバーに送信
+    if (frameCount % 15 === 0) {
       this.emitPosition()
     }
   }
