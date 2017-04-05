@@ -32,7 +32,7 @@ export function draw() {
 }
 
 // サーバーからの通信を受け取る
-socket.on('update', (data) => {
+socket.on('update-player', (data) => {
   if (tuda) {
     tuda.setUpdateData(data)
   }

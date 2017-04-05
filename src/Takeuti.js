@@ -34,6 +34,6 @@ export default class Takeuti extends Player {
       },
     }
 
-    socket.emit('update', data);
+    socket.emit('update-player', data);
   }
 }

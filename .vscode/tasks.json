@@ -20,8 +20,8 @@
       "args": ["run", "server"]
     },
     {
-      "taskName": "start",
-      "args": ["run", "start"]
+      "taskName": "dev-server",
+      "args": ["run", "dev-server"]
     }
   ]
 }
